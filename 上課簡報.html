@@ -64,6 +64,17 @@
   .step .no{color:var(--gold);font-family:"Noto Serif TC",serif;font-weight:900;font-size:clamp(20px,2.4vw,30px);}
   .step .tt{font-weight:700;margin:4px 0;font-size:clamp(14px,1.5vw,18px);}
   .step .dd{color:var(--muted);font-size:clamp(12px,1.3vw,15px);}
+  /* 示範腳本（跟我一起做） */
+  .datachip{display:inline-block;background:rgba(181,81,58,.10);border:1px solid var(--line);color:var(--gold);
+    border-radius:30px;padding:6px 16px;font-size:clamp(13px,1.45vw,18px);font-weight:600;margin:4px 0 16px;}
+  ol.demo{counter-reset:d;list-style:none;display:flex;flex-direction:column;gap:11px;margin-top:4px;padding:0;}
+  ol.demo li{counter-increment:d;position:relative;padding-left:48px;font-size:clamp(14px,1.55vw,20px);line-height:1.5;}
+  ol.demo li::before{content:counter(d);position:absolute;left:0;top:-2px;width:31px;height:31px;background:var(--gold);
+    color:#FCF5EA;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;}
+  ol.demo li b{color:var(--gold);}
+  ol.demo li .say{display:block;color:var(--muted);font-size:.86em;margin-top:2px;}
+  .younow{margin-top:18px;background:var(--gold);color:#FCF5EA;border-radius:10px;padding:12px 18px;
+    font-size:clamp(14px,1.55vw,19px);font-weight:700;}
   /* nav */
   .navbar{position:fixed;bottom:0;left:0;right:0;height:8vh;min-height:54px;display:flex;align-items:center;justify-content:space-between;
     padding:0 7vw;background:linear-gradient(0deg,var(--bg) 60%,transparent);z-index:50;}
@@ -273,42 +284,64 @@
     <div class="card bad" style="margin-top:8px;"><h3>❌ 舊思維</h3><p>「幫我整理一下會議紀錄。」→ 一大段文字、格式不固定、漏決議或負責人。</p></div>
     <div class="card good" style="margin-top:14px;"><h3>✅ 完整正確版（六件）</h3>
       <div class="prompt"><b>（角色）</b>你是會議記錄助理。<b>（背景）</b>這是社區會議逐字稿〔貼上〕。<b>（目標）</b>整理成表格：討論事項／決議／負責人／截止日。<b>（限制）</b>只整理稿子裡有的，沒提到填「未提及」。<b>（範例）</b>一列：電梯維修｜下月發包｜王主任｜6/30。<b>（輸出）</b>直接給我表格。</div></div>
-    <div class="sub" style="margin-top:14px;">🖥 你做①：用自己的會議片段做出來 → 🔁 實測：加反向檢查＋兩兩互測，修到能用。</div>
   </section>
 
-  <!-- 16 SOP -->
+  <!-- 會議記錄 示範腳本 -->
   <section class="slide">
-    <div class="kicker">示範 ② · SOP</div>
-    <h2>SOP：先<span class="gold">分析</span>，再決定<span class="gold">呈現</span></h2>
-    <div class="sub">拿到管理辦法，<b class="gold">不要急著叫 AI 生 SOP</b>。先分析 → 決定用途 → 再產出。</div>
-    <div class="steps">
-      <div class="step"><div class="no">1</div><div class="tt">先定位</div><div class="dd">給現場同仁照做</div></div>
-      <div class="step"><div class="no">2</div><div class="tt">先分析</div><div class="dd">角色/階段/表單/金額/罰則</div></div>
-      <div class="step"><div class="no">3</div><div class="tt">產出</div><div class="dd">可勾選的 SOP 表格</div></div>
-      <div class="step"><div class="no">4</div><div class="tt">反向檢查</div><div class="dd">跟原辦法逐條比對</div></div>
-    </div>
-    <div class="sub" style="margin-top:18px;">（成果見「SOP示範_裝修與遷入.html」。導入前先跟同仁溝通觀念，今天只示範。）</div>
+    <div class="kicker">跟我一起做 · 會議記錄</div>
+    <h2>示範腳本：<span class="gold">逐字稿 → 表格</span></h2>
+    <div class="datachip">📄 資料：一段去識別化會議逐字稿（已備好）</div>
+    <ol class="demo">
+      <li><b>開新對話</b>：打開 Claude，按 New chat。</li>
+      <li><b>先求有</b>：貼上逐字稿，只給「目標＋背景＋輸出」先跑一次。<span class="say">先看堪用但格式亂的版本，讓大家有對照。</span></li>
+      <li><b>升級求好</b>：補上角色＋限制＋範例，再跑一次，看欄位變整齊。</li>
+      <li><b>反向檢查</b>：追問「有沒有漏掉決議或負責人？」</li>
+      <li><b>存起來</b>：把這段指令存成 Project／罐頭指令，下次直接用。</li>
+    </ol>
+    <div class="younow">▶ 換你做：用自己的逐字稿照這 5 步做一次，我巡場協助；再兩兩互測。</div>
   </section>
 
-  <!-- 17 公告 經理 -->
+  <!-- SOP 示範腳本 -->
   <section class="slide">
-    <div class="kicker">示範 ③ · 公告（經理主講）</div>
-    <h2>用 <span class="gold">GPT</span> 做公告</h2>
-    <ul>
-      <li>經理現場示範：拿一則生硬公告 → 用 GPT <b>改得親切好讀、重點清楚</b>。</li>
-      <li><b class="gold">反向檢查</b>：請 GPT 先核對日期、金額、繳費方式，再定稿。</li>
-      <li>（可選）把定稿丟給能生圖的工具，做成可貼公佈欄／LINE 的公告圖。</li>
-    </ul>
-    <div class="sub" style="margin-top:16px;">寶哥補位：用「六件」點評——同一套邏輯，換工具也通。</div>
+    <div class="kicker">跟我一起做 · SOP</div>
+    <h2>示範腳本：<span class="gold">管理辦法 → SOP</span></h2>
+    <div class="datachip">📄 資料：一份社區管理辦法 PDF（裝修施工）</div>
+    <ol class="demo">
+      <li><b>上傳辦法</b>：打開 Claude，把裝修辦法 PDF 丟進去。</li>
+      <li><b>先分析・別急著生</b>：請它列出角色／階段／表單與金額／時間點／罰則。<span class="say">先讓大家看 AI 怎麼「讀懂」一份辦法。</span></li>
+      <li><b>定用途</b>：告訴它「給現場同仁照著做」，決定呈現成檢核清單。</li>
+      <li><b>產出 SOP</b>：請它做成表格——階段／步驟／負責人／表單金額／檢查點。</li>
+      <li><b>反向檢查</b>：跟原辦法逐條比對，金額天數對不對。</li>
+    </ol>
+    <div class="younow">▶ 看成果：打開「SOP示範_裝修與遷入.html」。回家可拿自己社區一份辦法照做。</div>
   </section>
 
-  <!-- 18 區權會拆解 -->
+  <!-- 公告 經理示範腳本 -->
   <section class="slide">
-    <div class="kicker">痛點 ④ · 區權會簡報</div>
-    <h2>複雜的事，先讓 AI 幫你<span class="gold">拆</span></h2>
-    <div class="card good" style="margin-top:8px;"><h3>✅ 正確版（鉤子）</h3>
-      <div class="prompt">「你是社區行政助理。我要做一份區權會簡報。<b>先不要急著做</b>，請先把它拆成幾個步驟、列出每步要我提供什麼資料，我確認後再一步一步做。可參考去年架構：開場→財務回顧→重大事項→表決議案→結論。」</div></div>
-    <div class="big-quote" style="margin-top:22px;font-size:clamp(19px,2.6vw,32px);">先拆，再一步一步餵——<span class="gold">這就是「先拆解再做」。</span></div>
+    <div class="kicker">經理示範 · 公告（用 GPT）</div>
+    <h2>示範腳本：<span class="gold">生硬公告 → 親切好讀</span></h2>
+    <div class="datachip">📄 資料：一則現成的生硬公告（經理準備）</div>
+    <ol class="demo">
+      <li><b>貼原公告</b>：打開 ChatGPT，貼上原本的公告。</li>
+      <li><b>改寫</b>：給角色＋限制＋範例——「社區管理員、150 字內、沿用『各位住戶您好』」。</li>
+      <li><b>反向檢查</b>：請它先核對日期、金額、繳費方式有沒有錯，再定稿。</li>
+      <li><b>做成圖・可選</b>：把定稿丟給能生圖的工具，做成可貼公佈欄／LINE 的公告圖。</li>
+    </ol>
+    <div class="younow">▶ 寶哥補位：用「六件」點評經理的做法——同一套邏輯，換工具也通。</div>
+  </section>
+
+  <!-- 區權會 示範腳本 -->
+  <section class="slide">
+    <div class="kicker">跟我一起做 · 區權會簡報</div>
+    <h2>示範腳本：<span class="gold">大任務先拆解</span></h2>
+    <div class="datachip">📄 資料：一個簡報需求（例：年度區權會）</div>
+    <ol class="demo">
+      <li><b>說清楚要做什麼</b>：打開 Claude，說「我要做一份區權會簡報」。</li>
+      <li><b>先別急著做</b>：要它「先拆成幾個步驟、列出每步要我給什麼資料」。</li>
+      <li><b>逐段餵</b>：確認後一步一步給——重大事項 → 財務收支 → 表決議案。</li>
+      <li><b>排大綱</b>：最後請它排成簡報大綱。</li>
+    </ol>
+    <div class="younow">▶ 一句收：複雜的事先讓 AI 幫你拆，再一步一步餵——這就是「先拆解再做」。</div>
   </section>
 
   <!-- 19 收尾金句 -->
