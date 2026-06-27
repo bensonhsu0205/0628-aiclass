@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>物業專用・Gemini 工作術包</title>
+<style>
+  :root{
+    --bg:#F7F2EC;--ink:#2E2A28;--coral:#E76F51;--coral-soft:#FBE6DF;
+    --grey:#6B6360;--line:#E3D9CE;--card:#FFFFFF;--code:#FBF6F0;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.6;padding:32px 16px;}
+  .wrap{max-width:900px;margin:0 auto;}
+  .hero{background:var(--ink);color:#fff;border-radius:16px;padding:26px 28px;position:relative;overflow:hidden;}
+  .hero::after{content:"";position:absolute;right:-40px;top:-40px;width:160px;height:160px;background:var(--coral);opacity:.25;border-radius:50%;}
+  .hero .kicker{color:var(--coral);font-size:13px;letter-spacing:2px;font-weight:700;}
+  .hero h1{font-size:27px;margin:8px 0 6px;}
+  .hero p{color:#d8cfc8;font-size:14px;}
+  .arch{background:var(--coral);color:#fff;border-radius:12px;padding:16px 20px;margin:18px 0 10px;break-inside:avoid;}
+  .arch .lab{font-size:12px;letter-spacing:1px;opacity:.92;font-weight:700;}
+  .arch .layer{font-size:13.5px;margin:6px 0;}
+  .arch .layer b{background:rgba(255,255,255,.18);border-radius:5px;padding:1px 7px;}
+  .arch .order{font-size:13.5px;font-weight:800;margin-top:6px;}
+  .tips{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0 20px;}
+  .tip{background:var(--coral-soft);color:#8a3b29;font-size:12.5px;padding:7px 12px;border-radius:20px;}
+  h2.group{font-size:16px;color:var(--coral);border-left:6px solid var(--coral);padding-left:12px;margin:22px 0 12px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:15px 18px;margin-bottom:13px;break-inside:avoid;}
+  .card h3{font-size:15px;margin-bottom:4px;}
+  .card h3 .num{color:var(--coral);font-weight:800;margin-right:6px;}
+  .card .scene{font-size:12.5px;color:var(--grey);margin-bottom:8px;}
+  pre{background:var(--code);border:1px dashed var(--line);border-radius:8px;padding:11px 13px;
+    font-family:"PingFang TC","Noto Sans TC",monospace;font-size:12.5px;color:#3a3431;white-space:pre-wrap;line-height:1.7;}
+  pre b{color:var(--coral);font-family:inherit;}
+  .warn{color:var(--coral);font-weight:600;font-size:12.5px;display:block;margin-top:7px;}
+  .pick{background:var(--ink);color:#f1e9e2;border-radius:12px;padding:16px 20px;font-size:13px;margin-top:22px;}
+  .pick b{color:var(--coral);}
+  footer{text-align:center;color:var(--grey);font-size:12px;margin-top:14px;}
+  @media print{body{background:#fff;padding:0;}
+    .hero,.tip,.arch,.pick{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    .card{box-shadow:none;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="kicker">物業專用 · Google AI</div>
+    <h1>Gemini 工作術包</h1>
+    <p>Gemini 最強的是「住進你的 Google」——Gmail、文件、試算表、簡報、雲端、日曆。免費版就能用很多。</p>
+  </div>
+
+  <div class="arch">
+    <div class="lab">不管用哪個 AI，都用課堂教的「六件」下指令</div>
+    <div class="layer">第一層（先求有）＝ <b>目標</b> <b>背景</b> <b>輸出</b></div>
+    <div class="layer">第二層（求好）＝ 再補 <b>角色</b> <b>限制</b> <b>範例</b></div>
+    <div class="order">順序：角色 → 目標 → 背景 → 限制 → 範例 → 輸出</div>
+  </div>
+
+  <div class="tips">
+    <span class="tip">① 法規金額一定人核實</span>
+    <span class="tip">② 個資先去識別化</span>
+    <span class="tip">③ 免費版有額度，重任務分段做</span>
+  </div>
+
+  <h2 class="group">七個現場用例（都用六件寫好了）</h2>
+
+  <div class="card"><h3><span class="num">01</span>Gmail：住戶來信分類</h3>
+  <div class="scene">信箱塞滿報修、詢問、抱怨，分不完。</div>
+  <pre><b>（角色）</b>你是社區管理客服。<b>（背景）</b>以下是本週住戶來信〔貼上或讓 Gemini 讀取〕。<b>（目標）</b>分類成報修／費用詢問／投訴／一般詢問，整理成表格：寄件人／類別／重點／建議回覆方向／急迫度。<b>（限制）</b>只根據信件內容、不要臆測。<b>（輸出）</b>給我表格。</pre></div>
+
+  <div class="card"><h3><span class="num">02</span>Google 試算表：自動建追蹤表</h3>
+  <div class="scene">報修、繳費、工程進度做成可追蹤的表（輸入「@」可讀雲端硬碟）。</div>
+  <pre><b>（角色）</b>你是社區行政助理。<b>（目標）</b>建立一張「報修追蹤表」。<b>（限制）</b>欄位：日期／戶別（代號）／報修項目／負責廠商／狀態／完成日，並設一個「未完成」篩選檢視。<b>（輸出）</b>直接建在這張試算表。</pre></div>
+
+  <div class="card"><h3><span class="num">03</span>Notebooks：建「社區法規知識庫」★最推薦</h3>
+  <div class="scene">把管理辦法、規約上傳成一個 Notebook，之後直接問它。</div>
+  <pre><b>（角色）</b>你是社區法規查詢助理。<b>（背景）</b>這是我們社區的各項管理辦法與住戶規約〔上傳檔案〕。<b>（限制）</b>我問問題時只根據這些文件回答，並標出依據哪一條；文件沒寫到的請說「辦法未規範」，不要自己編。<b>（輸出）</b>用問答方式回我。</pre>
+  <span class="warn">試問：「裝修保證金多少、何時退？」「承租戶遷入要附什麼文件？」</span></div>
+
+  <div class="card"><h3><span class="num">04</span>Canvas：一鍵生簡報／互動公告網頁</h3>
+  <div class="scene">區權會簡報、住戶說明頁。</div>
+  <pre><b>（角色）</b>你是社區行政助理。<b>（目標）</b>用 Canvas 做〔社區年度區權會〕簡報。<b>（範例）</b>架構：開場→財務回顧→重大事項→表決議案→結論。<b>（限制）</b>每頁先給標題與三個重點，我確認後再展開。<b>（輸出）</b>可編輯投影片。</pre></div>
+
+  <div class="card"><h3><span class="num">05</span>Google 文件：一鍵輸出公文 Word／PDF</h3>
+  <pre><b>（角色）</b>你是社區行政助理。<b>（目標）</b>把這則內容寫成正式社區公告函。<b>（背景）</b>〔貼上重點〕。<b>（範例）</b>沿用開頭「各位住戶您好」。<b>（限制）</b>語氣親切正式、150 字內。<b>（輸出）</b>整理成可直接下載 Word 的格式。</pre></div>
+
+  <div class="card"><h3><span class="num">06</span>Deep Research：查物業法規（免費可用）</h3>
+  <pre><b>（角色）</b>你是法規查詢助理。<b>（目標）</b>查「公寓大廈管理條例」中關於〔區權會出席與表決門檻〕的規定。<b>（限制）</b>列出條文出處與重點。<b>（輸出）</b>條列給我。</pre>
+  <span class="warn">⚠️ AI 查法規可能過時或出錯，最後一定要對照官方條文／問專業。</span></div>
+
+  <div class="card"><h3><span class="num">07</span>Google 日曆：年度行事曆排程</h3>
+  <div class="scene">消防安檢、水塔清洗、電梯保養有固定週期。</div>
+  <pre><b>（角色）</b>你是社區行政助理。<b>（目標）</b>把年度例行工作排進行事曆。<b>（背景）</b>消防安檢每年X月、水塔清洗每半年、電梯保養每月。<b>（限制）</b>列成提醒清單，並標出提前幾天要準備。<b>（輸出）</b>給我可加進 Google 日曆的清單。</pre></div>
+
+  <div class="pick">
+    <b>什麼時候用誰？</b>　碰 Gmail／Google 文件／試算表／雲端 → <b>Gemini</b>　·　讀長報告／逐字稿／整理公告 → <b>Claude</b>　·　生圖／建 GPTs／拆工作流 → <b>ChatGPT</b>
+  </div>
+  <footer>寶哥說物業管理小常識 @bensonhsu0205　·　0628 AI 教育訓練 學員獎品</footer>
+
+</div>
+</body>
+</html>

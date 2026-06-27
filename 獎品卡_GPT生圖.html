@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>物業專用・ChatGPT 生圖提示詞包</title>
+<style>
+  :root{
+    --bg:#F7F2EC;--ink:#2E2A28;--coral:#E76F51;--coral-soft:#FBE6DF;
+    --grey:#6B6360;--line:#E3D9CE;--card:#FFFFFF;--code:#FBF6F0;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.6;padding:32px 16px;}
+  .wrap{max-width:900px;margin:0 auto;}
+  .hero{background:var(--ink);color:#fff;border-radius:16px;padding:26px 28px;position:relative;overflow:hidden;}
+  .hero::after{content:"";position:absolute;right:-40px;top:-40px;width:160px;height:160px;background:var(--coral);opacity:.25;border-radius:50%;}
+  .hero .kicker{color:var(--coral);font-size:13px;letter-spacing:2px;font-weight:700;}
+  .hero h1{font-size:27px;margin:8px 0 6px;}
+  .hero p{color:#d8cfc8;font-size:14px;}
+  .arch{background:var(--coral);color:#fff;border-radius:12px;padding:16px 20px;margin:18px 0 10px;break-inside:avoid;}
+  .arch .lab{font-size:12px;letter-spacing:1px;opacity:.92;font-weight:700;}
+  .arch .layer{font-size:13.5px;margin:6px 0;}
+  .arch .layer b{background:rgba(255,255,255,.18);border-radius:5px;padding:1px 7px;}
+  .arch .order{font-size:13.5px;font-weight:800;margin-top:6px;}
+  .tips{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0 22px;}
+  .tip{background:var(--coral-soft);color:#8a3b29;font-size:12.5px;padding:7px 12px;border-radius:20px;}
+  h2.group{font-size:17px;color:var(--coral);border-left:6px solid var(--coral);padding-left:12px;margin:24px 0 14px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;break-inside:avoid;}
+  .card h3{font-size:15px;margin-bottom:8px;}
+  .card h3 .num{color:var(--coral);font-weight:800;margin-right:6px;}
+  pre{background:var(--code);border:1px dashed var(--line);border-radius:8px;padding:11px 13px;
+    font-family:"PingFang TC","Noto Sans TC",monospace;font-size:12.5px;color:#3a3431;white-space:pre-wrap;line-height:1.7;}
+  pre b{color:var(--coral);font-family:inherit;}
+  .footer-note{background:var(--ink);color:#f1e9e2;border-radius:12px;padding:16px 20px;font-size:13px;margin-top:24px;}
+  .footer-note b{color:var(--coral);}
+  footer{text-align:center;color:var(--grey);font-size:12px;margin-top:14px;}
+  @media print{body{background:#fff;padding:0;}
+    .hero,.tip,.arch,.footer-note{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    .card{box-shadow:none;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="kicker">物業專用 · AI 生圖</div>
+    <h1>ChatGPT 生圖提示詞包・14 組</h1>
+    <p>每組都用課堂教的「六件指令架構」寫好了。貼上 → 換〔你的資訊〕→ 微調即可。</p>
+  </div>
+
+  <div class="arch">
+    <div class="lab">用課堂教的「六件」下指令</div>
+    <div class="layer">第一層（先求有）＝ <b>目標</b> <b>背景</b> <b>輸出</b></div>
+    <div class="layer">第二層（求好）＝ 再補 <b>角色</b> <b>限制</b> <b>範例</b></div>
+    <div class="order">順序：角色 → 目標 → 背景 → 限制 → 範例 → 輸出</div>
+  </div>
+
+  <div class="tips">
+    <span class="tip">① 圖上文字會出錯，先校對日期金額</span>
+    <span class="tip">② 真實資料先去識別化</span>
+    <span class="tip">③ 公佈欄用「直式 A4」、LINE 用「9:16」</span>
+  </div>
+
+  <h2 class="group">一、公告與通知</h2>
+  <div class="card"><h3><span class="num">01</span>停水／停電公告圖</h3>
+  <pre><b>（角色）</b>你是社區公告美編。<b>（目標）</b>做一張停水通知圖。<b>（背景）</b>停水時間 6/30 09:00–12:00、原因清洗水塔、請住戶提前儲水。<b>（限制）</b>直式 A4、深藍＋白、字大長輩看得清楚。<b>（輸出）</b>給我可貼公佈欄的圖，下方留管理中心電話欄位。</pre></div>
+  <div class="card"><h3><span class="num">02</span>颱風／防災通知圖</h3>
+  <pre><b>（角色）</b>你是社區安全宣導美編。<b>（目標）</b>做一張颱風防災通知圖。<b>（背景）</b>提醒住戶收好陽台物品、關好門窗、低樓層車輛移車。<b>（限制）</b>9:16 直式適合 LINE、沉穩有警示感（深藍＋橘點綴）、搭配簡單 icon。<b>（輸出）</b>標題醒目、可直接貼 LINE 群組。</pre></div>
+  <div class="card"><h3><span class="num">03</span>繳費通知圖卡</h3>
+  <pre><b>（角色）</b>你是社區行政美編。<b>（目標）</b>做一張管理費繳費提醒圖卡。<b>（背景）</b>季繳、請於本月底前繳納、可至管理中心或轉帳。<b>（限制）</b>語氣溫和不強硬、暖色調、乾淨。<b>（輸出）</b>下方放繳費方式欄位。</pre></div>
+
+  <h2 class="group">二、活動海報</h2>
+  <div class="card"><h3><span class="num">04</span>節慶活動海報（中秋／尾牙）</h3>
+  <pre><b>（角色）</b>你是活動視覺設計。<b>（目標）</b>做一張社區〔中秋〕住戶活動海報。<b>（背景）</b>活動日期、地點中庭、報名方式。<b>（限制）</b>直式、氛圍溫馨熱鬧、節慶配色與應景插圖。<b>（輸出）</b>標題大、資訊一目了然。</pre></div>
+  <div class="card"><h3><span class="num">05</span>開會／演練通知海報</h3>
+  <pre><b>（角色）</b>你是正式公告設計。<b>（目標）</b>做一張〔區分所有權人會議〕通知海報。<b>（背景）</b>日期、時間、地點、出席與委託書提醒。<b>（限制）</b>莊重專業（深藍金色點綴）、條列清楚。<b>（範例）</b>像正式開會通知的格式。<b>（輸出）</b>適合張貼公佈欄。</pre></div>
+
+  <h2 class="group">三、資訊圖／圖卡</h2>
+  <div class="card"><h3><span class="num">06</span>社區 Q&A 問答圖卡</h3>
+  <pre><b>（角色）</b>你是資訊圖設計。<b>（目標）</b>做一張 FAQ 問答圖卡，主題〔訪客停車規定〕。<b>（背景）</b>3–4 個常見問題與回答〔貼上〕。<b>（限制）</b>視覺化、乾淨好讀。<b>（輸出）</b>適合貼公佈欄與 LINE。</pre></div>
+  <div class="card"><h3><span class="num">07</span>設施使用須知資訊圖</h3>
+  <pre><b>（角色）</b>你是公設標示設計。<b>（目標）</b>做一張〔健身房〕使用須知資訊圖。<b>（背景）</b>開放時間、注意事項、禁止事項。<b>（限制）</b>用 icon＋短句、版面清楚現代。<b>（輸出）</b>適合貼設施入口。</pre></div>
+  <div class="card"><h3><span class="num">08</span>年度修繕成果資訊圖表</h3>
+  <pre><b>（角色）</b>你是商業資訊圖設計。<b>（目標）</b>把社區年度修繕成果做成資訊圖。<b>（背景）</b>電梯保養、外牆清洗、消防檢修等項目與完成狀況〔貼上〕。<b>（限制）</b>版面專業、重點明確。<b>（輸出）</b>適合區權會簡報或公佈欄展示。</pre></div>
+
+  <h2 class="group">四、流程圖解</h2>
+  <div class="card"><h3><span class="num">09</span>報修流程圖解</h3>
+  <pre><b>（角色）</b>你是流程圖設計。<b>（目標）</b>把「住戶報修流程」做成步驟式圖解。<b>（背景）</b>通報→登記→派工→處理→回報。<b>（限制）</b>用 icon、箭頭與簡短文字、清楚現代。<b>（輸出）</b>適合貼管理中心與住戶手冊。</pre></div>
+  <div class="card"><h3><span class="num">10</span>裝修申請流程圖解</h3>
+  <pre><b>（角色）</b>你是流程圖設計。<b>（目標）</b>把「住戶裝修申請流程」做成圖解。<b>（背景）</b>施工 3 日前申請→填申請表與切結書→繳保證金→施工管理→竣工驗收→退保證金。<b>（限制）</b>步驟清楚、附 icon。<b>（輸出）</b>適合給住戶看。</pre></div>
+
+  <h2 class="group">五、清單與簡報</h2>
+  <div class="card"><h3><span class="num">11</span>工作 Checklist 圖卡</h3>
+  <pre><b>（角色）</b>你是表單視覺設計。<b>（目標）</b>做一張工作用 Checklist 圖卡，主題〔每日巡檢項目〕。<b>（背景）</b>巡檢項目清單〔貼上〕。<b>（限制）</b>乾淨排版＋勾選框、專業實用。<b>（輸出）</b>適合列印給現場同仁。</pre></div>
+  <div class="card"><h3><span class="num">12</span>區權會簡報封面</h3>
+  <pre><b>（角色）</b>你是簡報視覺設計。<b>（目標）</b>做一張〔社區〇〇年度區權會〕簡報封面。<b>（限制）</b>專業莊重、簡潔排版、企業感配色。<b>（範例）</b>像正式會議簡報封面。<b>（輸出）</b>橫式 16:9 封面圖。</pre></div>
+
+  <h2 class="group">六、品牌社群（寶哥自用）</h2>
+  <div class="card"><h3><span class="num">13</span>物業小常識社群貼文圖</h3>
+  <pre><b>（角色）</b>你是品牌社群美編。<b>（目標）</b>做一張 Instagram 貼文圖，主題「物業管理小常識：〔公設使用規則〕」。<b>（限制）</b>現代簡潔、品牌調性溫暖專業、標題吸睛。<b>（輸出）</b>正方形 1:1，適合知識型分享。</pre></div>
+  <div class="card"><h3><span class="num">14</span>社區公告統一模板組</h3>
+  <pre><b>（角色）</b>你是品牌視覺設計。<b>（目標）</b>設計一套社區公告模板。<b>（背景）</b>包含「一般公告／活動通知／繳費提醒／緊急通知」四種版型。<b>（限制）</b>風格統一、配色穩重、容易套用。<b>（輸出）</b>方便每次只換文字。</pre></div>
+
+  <div class="footer-note">
+    <b>記住一句：</b>第一層大家都會（目標・背景・輸出），差距在第二層——尤其「範例」。給它一個你要的風格參考，圖就更貼近你想要的。
+  </div>
+  <footer>寶哥說物業管理小常識 @bensonhsu0205　·　0628 AI 教育訓練 學員獎品</footer>
+
+</div>
+</body>
+</html>

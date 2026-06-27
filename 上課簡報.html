@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>用 AI 把重複工作變簡單 ｜ 伯克錸物業 AI 教育訓練</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* warm-paper：米白紙感＋赭紅，明亮編輯感 */
+    --bg:#F3EADA; --bg2:#ECE0CB; --panel:#FCF7EE; --panel2:#F5EDDD;
+    --gold:#B5513A; --gold2:#C2603F; --ink:#36291C; --muted:#8A7B66;
+    --line:rgba(120,86,52,.24); --red:#B5513A; --green:#5E7A4A;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{height:100%;}
+  body{
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    background:var(--bg);color:var(--ink);overflow:hidden;
+  }
+  .serif{font-family:"Noto Serif TC",serif;}
+  /* progress */
+  #bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold2));z-index:60;transition:width .3s;}
+  /* deck */
+  .deck{position:relative;height:100vh;width:100vw;}
+  .slide{position:absolute;inset:0;display:none;flex-direction:column;justify-content:center;
+    padding:6vh 7vw 11vh;animation:fade .4s ease;}
+  .slide.active{display:flex;}
+  @keyframes fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+  .kicker{color:var(--gold);font-size:clamp(12px,1.4vw,16px);letter-spacing:3px;font-weight:700;text-transform:uppercase;margin-bottom:14px;}
+  .kicker::before{content:"";display:inline-block;width:28px;height:2px;background:var(--gold);vertical-align:middle;margin-right:12px;}
+  h1{font-family:"Noto Serif TC",serif;font-weight:900;line-height:1.15;font-size:clamp(30px,5.6vw,72px);}
+  h2{font-family:"Noto Serif TC",serif;font-weight:700;line-height:1.2;font-size:clamp(26px,4vw,48px);margin-bottom:6px;}
+  .sub{color:var(--muted);font-size:clamp(15px,1.7vw,22px);margin-top:14px;line-height:1.6;}
+  .gold{color:var(--gold2);}
+  ul{list-style:none;margin-top:22px;display:flex;flex-direction:column;gap:14px;}
+  li{font-size:clamp(15px,1.7vw,21px);line-height:1.5;padding-left:26px;position:relative;}
+  li::before{content:"◆";color:var(--gold);position:absolute;left:0;font-size:.75em;top:.35em;}
+  li b{color:var(--gold2);font-weight:700;}
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:24px;}
+  .cols3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;margin-top:24px;}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 22px;}
+  .card h3{font-family:"Noto Serif TC",serif;color:var(--gold2);font-size:clamp(17px,2vw,24px);margin-bottom:8px;}
+  .card p,.card li{font-size:clamp(13px,1.45vw,18px);color:var(--ink);}
+  .card.dim p{color:var(--muted);}
+  .tag{display:inline-block;background:rgba(181,81,58,.10);border:1px solid var(--line);color:var(--gold);
+    font-size:clamp(11px,1.2vw,14px);padding:3px 12px;border-radius:30px;margin:3px 4px 3px 0;}
+  .bad{border-left:4px solid var(--red);} .good{border-left:4px solid var(--green);}
+  .bad h3{color:var(--red);} .good h3{color:var(--green);}
+  .prompt{background:#FBF3E4;border:1px dashed var(--gold);border-radius:10px;padding:14px 16px;margin-top:10px;
+    font-size:clamp(12px,1.35vw,16px);line-height:1.7;color:#4A3A28;}
+  .prompt b{color:var(--gold);}
+  .big-quote{font-family:"Noto Serif TC",serif;font-weight:700;font-size:clamp(24px,3.6vw,46px);line-height:1.4;color:var(--ink);}
+  .big-quote .gold{color:var(--gold2);}
+  table{width:100%;border-collapse:collapse;margin-top:18px;font-size:clamp(11px,1.25vw,15px);}
+  th{background:var(--gold);color:#FCF5EA;text-align:left;padding:7px 10px;font-weight:700;}
+  td{padding:7px 10px;border-bottom:1px solid var(--line);color:var(--ink);}
+  td.t{color:var(--gold2);font-weight:700;white-space:nowrap;}
+  .flow3 strong{color:var(--gold2);}
+  .steps{display:flex;gap:12px;margin-top:22px;flex-wrap:wrap;}
+  .step{flex:1;min-width:150px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;}
+  .step .no{color:var(--gold);font-family:"Noto Serif TC",serif;font-weight:900;font-size:clamp(20px,2.4vw,30px);}
+  .step .tt{font-weight:700;margin:4px 0;font-size:clamp(14px,1.5vw,18px);}
+  .step .dd{color:var(--muted);font-size:clamp(12px,1.3vw,15px);}
+  /* nav */
+  .navbar{position:fixed;bottom:0;left:0;right:0;height:8vh;min-height:54px;display:flex;align-items:center;justify-content:space-between;
+    padding:0 7vw;background:linear-gradient(0deg,var(--bg) 60%,transparent);z-index:50;}
+  .brand{color:var(--muted);font-size:clamp(11px,1.2vw,14px);}
+  .brand b{color:var(--gold2);}
+  .pager{display:flex;align-items:center;gap:14px;}
+  .navbtn{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--panel);color:var(--gold2);
+    font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s;}
+  .navbtn:hover{background:var(--gold);color:#FCF5EA;border-color:var(--gold);}
+  .count{color:var(--muted);font-size:14px;min-width:60px;text-align:center;letter-spacing:1px;}
+  .deco{position:absolute;right:6vw;top:8vh;width:clamp(80px,11vw,150px);height:clamp(80px,11vw,150px);
+    border:1px solid var(--line);border-radius:50%;opacity:.5;}
+  .deco::after{content:"✦";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:1.6em;opacity:.6;}
+  .center{align-items:center;text-align:center;}
+  .hintkey{position:fixed;bottom:9vh;left:50%;transform:translateX(-50%);color:var(--muted);font-size:12px;opacity:.6;z-index:40;}
+  @media (max-width:680px){.cols,.cols3{grid-template-columns:1fr;} h1{font-size:34px;}}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<div class="deck" id="deck">
+
+  <!-- 1 封面 -->
+  <section class="slide active center">
+    <div class="deco"></div>
+    <div class="kicker">伯克錸物業 · AI 教育訓練</div>
+    <h1>用 AI 把<span class="gold">重複工作</span>變簡單</h1>
+    <div class="sub">打通底層邏輯，做出你的第一個 skill<br>2026 / 06 / 28（日）9:00–12:00　台中公司會議室</div>
+    <div style="margin-top:40px;color:var(--gold2);font-family:'Noto Serif TC',serif;font-size:clamp(14px,1.6vw,20px);">寶哥說物業管理小常識　@bensonhsu0205</div>
+  </section>
+
+  <!-- 2 今天目標 -->
+  <section class="slide">
+    <div class="kicker">Today · 今天要做什麼</div>
+    <h2>每人下課，帶走<span class="gold">一個能用的 skill</span></h2>
+    <div class="sub">skill ＝ 把一段「寫好的指令」存起來重複用（罐頭指令／Project／GPTs／Gem）。</div>
+    <ul>
+      <li>今天用你們票選的四大痛點當練習題（依問卷排序）：</li>
+    </ul>
+    <div class="cols" style="margin-top:14px;">
+      <div class="card"><h3>① 會議記錄</h3><p class="dim" style="color:var(--muted)">逐字稿 → 表格，今天的<b style="color:var(--gold2)">核心</b></p></div>
+      <div class="card"><h3>② SOP 建立</h3><p style="color:var(--muted)">管理辦法 → 可操作 SOP</p></div>
+      <div class="card"><h3>③ 公告</h3><p style="color:var(--muted)">經理示範・用 GPT</p></div>
+      <div class="card"><h3>④ 區權會</h3><p style="color:var(--muted)">大任務先拆解</p></div>
+    </div>
+  </section>
+
+  <!-- 3 流程總覽 -->
+  <section class="slide">
+    <div class="kicker">Agenda · 3 小時流程</div>
+    <h2>時間都留給<span class="gold">第一個 skill</span></h2>
+    <table>
+      <tr><th>時間</th><th>段落</th><th>誰</th></tr>
+      <tr><td class="t">00–32′</td><td>觀念：AI 是什麼・底層邏輯三部曲・先拆解</td><td>寶哥</td></tr>
+      <tr><td class="t">32–55′</td><td><strong>示範① 會議記錄</strong>（錄音→逐字稿→表格）</td><td>寶哥</td></tr>
+      <tr><td class="t">55–110′</td><td><strong>你做①</strong>：做好你的第一個 skill</td><td>學員</td></tr>
+      <tr><td class="t">120–140′</td><td><strong>實測＋迭代</strong>：反向檢查＋互測</td><td>學員</td></tr>
+      <tr><td class="t">140–153′</td><td>示範② SOP（管理辦法→SOP，快示範）</td><td>寶哥</td></tr>
+      <tr><td class="t">153–173′</td><td>示範③ 公告（用 GPT）</td><td>經理</td></tr>
+      <tr><td class="t">173–180′</td><td>收尾：金句・獎品・延伸</td><td>寶哥</td></tr>
+    </table>
+    <div class="sub" style="margin-top:14px;">原則：工具只「快覽」，痛點才「實作到底」。學員實際動手約 70 分鐘。</div>
+  </section>
+
+  <!-- 4 開場確認 -->
+  <section class="slide">
+    <div class="kicker">Start · 開場</div>
+    <h2>先確認：那 <span class="gold">7 關</span>，做了沒？</h2>
+    <ul>
+      <li>舉手調查：課前學習包 7 關完成了嗎？帳號登入了嗎？</li>
+      <li><b>已完成</b> → 等一下直接進實機。</li>
+      <li><b>還沒完成</b> → 別緊張，這段快速帶你練一次＋講清楚緣由。</li>
+    </ul>
+    <div class="big-quote" style="margin-top:30px;">「我寧可花十分鐘把<span class="gold">緣由</span>講通，<br>也不要你回去照樣不會用。」</div>
+  </section>
+
+  <!-- 5 不是工具課 -->
+  <section class="slide">
+    <div class="kicker">Mindset · 觀念</div>
+    <h2>這不是工具課，是建立你的<span class="gold">AI 世界觀</span></h2>
+    <ul>
+      <li>神 Prompt、三分鐘學會 ChatGPT——看完很興奮，回工作現場還是不會用。</li>
+      <li>真正缺的不是某個神指令，而是<b>知道 AI 是什麼、強弱在哪、該放工作的哪個位置</b>。</li>
+      <li>工具會一直換，懂底層邏輯，下一個新 AI 出來你都能快速上手。</li>
+    </ul>
+    <div class="big-quote" style="margin-top:26px;">「不是教你怎麼<span class="gold">使用</span> AI，<br>是教你怎麼跟 AI 一起<span class="gold">工作</span>。」</div>
+  </section>
+
+  <!-- 6 AI是什麼 -->
+  <section class="slide">
+    <div class="kicker">What · AI 是什麼</div>
+    <h2>AI 不是在思考，而是在<span class="gold">預測</span></h2>
+    <div class="sub">層次比喻：AI＝餐飲業 → 生成式 AI＝餐廳 → <span class="gold">LLM</span>＝廚房 → ChatGPT／Claude／Gemini＝不同主廚。</div>
+    <div class="cols3">
+      <div class="card"><h3>它會說錯</h3><p style="color:var(--muted)">一本正經地胡說 → <b style="color:var(--gold2)">一定反向檢查</b></p></div>
+      <div class="card"><h3>它會失憶</h3><p style="color:var(--muted)">聊太久 → 開新對話、重貼重點</p></div>
+      <div class="card"><h3>沒有最強</h3><p style="color:var(--muted)">只有最適合 → 看任務選工具</p></div>
+    </div>
+    <div class="sub" style="margin-top:18px;"><span class="gold">Claude</span>＝研究助理（長文/PDF/逐字稿，今天主推）・<span class="gold">ChatGPT</span>＝全能 PM・<span class="gold">Gemini</span>＝Google 生態</div>
+  </section>
+
+  <!-- 7 為什麼現在用 -->
+  <section class="slide">
+    <div class="kicker">Why now · 為什麼現在用</div>
+    <h2>AI 最強的不是生成，是<span class="gold">處理資訊</span></h2>
+    <div class="sub">你最耗時間的不是寫東西，是「看東西」：報告、PDF、Email、逐字稿、SOP。</div>
+    <div class="cols3">
+      <div class="card"><h3>摘要</h3><p style="color:var(--muted)">兩小時會議 → 5 分鐘看完</p></div>
+      <div class="card"><h3>分類</h3><p style="color:var(--muted)">住戶訊息 → 報修/投訴/詢問</p></div>
+      <div class="card"><h3>萃取</h3><p style="color:var(--muted)">合約/報價 → 抓出金額日期</p></div>
+    </div>
+    <div class="sub" style="margin-top:18px;">為什麼是現在：這些工作重複、耗腦、每天發生，而 AI <b class="gold">現在已經做得很好</b>。</div>
+  </section>
+
+  <!-- 8 適合不適合 -->
+  <section class="slide">
+    <div class="kicker">Fit · 適合度</div>
+    <h2>AI 不怕複雜，它怕<span class="gold">模糊</span></h2>
+    <div class="cols">
+      <div class="card good"><h3>✅ AI 最愛</h3><ul style="margin-top:6px;"><li>有資料、有脈絡、有目標</li><li>摘要・分類・會議紀錄</li><li>Email・SOP・報價整理</li></ul></div>
+      <div class="card bad"><h3>❌ 人要把關</h3><ul style="margin-top:6px;"><li>沒資料的任務（「幫我做品牌」）</li><li>高風險決策：法律/財務/住戶糾紛</li><li>未來預測、從 0 到 1 真創新</li></ul></div>
+    </div>
+    <div class="big-quote" style="margin-top:24px;font-size:clamp(20px,2.8vw,34px);">AI 負責第一輪資訊處理，<span class="gold">你負責判斷與決策。</span></div>
+  </section>
+
+  <!-- 9 底層邏輯三部曲 -->
+  <section class="slide">
+    <div class="kicker">Core · 底層邏輯</div>
+    <h2><span class="gold">定位 · 方向 · 策略</span>三部曲</h2>
+    <div class="sub">AI 不幫你做決策，它只在你把底層邏輯想清楚之後幫你加速。</div>
+    <div class="cols3">
+      <div class="card"><h3>定位</h3><p style="color:var(--muted)">我在哪、是什麼角色、要解哪件事</p></div>
+      <div class="card"><h3>方向</h3><p style="color:var(--muted)">我要往哪去、想達成什麼結果</p></div>
+      <div class="card"><h3>策略</h3><p style="color:var(--muted)">用什麼路徑、拆成哪些步驟</p></div>
+    </div>
+    <div class="big-quote" style="margin-top:24px;font-size:clamp(19px,2.6vw,32px);">「蓋房子地基要穩、SOP 也要穩。<br><span class="gold">底層邏輯越穩，迭代越快。</span>」</div>
+  </section>
+
+  <!-- 10 兩個動作 -->
+  <section class="slide">
+    <div class="kicker">How · 打通邏輯</div>
+    <h2>打通底層邏輯的<span class="gold">兩個動作</span></h2>
+    <div class="cols">
+      <div class="card"><h3>① 讓 AI 重新認識你</h3>
+        <p style="color:var(--muted)">先餵它你的想法/工作/慣用格式（去識別化）。</p>
+        <p style="margin-top:8px;">❌「請分析我們公司」→亂編<br>✅「<b class="gold">以下是我們社區的資料，請根據內容分析</b>」</p></div>
+      <div class="card"><h3>② 不會下指令？叫 AI 教你</h3>
+        <p style="color:var(--muted)">卡住就反過來請它問你。</p>
+        <div class="prompt">「我想做 X，但不知道怎麼問你才精準。<b>請反過來問我幾個問題，問完幫我把指令寫好。</b>」</div></div>
+    </div>
+  </section>
+
+  <!-- 11 先拆解 -->
+  <section class="slide">
+    <div class="kicker">Decompose · 先拆解</div>
+    <h2>動手前，先把大想法<span class="gold">拆成小想法</span></h2>
+    <ul>
+      <li>AI 最厲害的地方，是幫你<b>分析、拆解</b>。</li>
+      <li>一次塞五件事（分析＋報告＋簡報＋行銷＋文案）→ AI 把資訊混在一起、<b>品質崩掉</b>。</li>
+      <li>做法：先請 AI 幫你<b class="gold">拆步驟</b>、列出每步要給什麼，你確認後再一步一步做。</li>
+    </ul>
+    <div class="big-quote" style="margin-top:26px;font-size:clamp(20px,2.8vw,34px);">不要急著做，<span class="gold">先讓它幫你拆。</span></div>
+  </section>
+
+  <!-- 12 工具＋發展 -->
+  <section class="slide">
+    <div class="kicker">Map · 工具與發展</div>
+    <h2>用 AI 的人，往哪裡<span class="gold">發展</span>？</h2>
+    <div class="steps">
+      <div class="step"><div class="no">1</div><div class="tt">問答</div><div class="dd">一次性聊天</div></div>
+      <div class="step"><div class="no">2</div><div class="tt">資訊處理</div><div class="dd">摘要/分類/萃取</div></div>
+      <div class="step"><div class="no">3</div><div class="tt">工作流</div><div class="dd">幾個步驟串起來</div></div>
+      <div class="step" style="border-color:var(--gold);"><div class="no">4</div><div class="tt">存成技能</div><div class="dd">今天的目標</div></div>
+      <div class="step"><div class="no">5</div><div class="tt">AI 作業系統</div><div class="dd">進階方向</div></div>
+    </div>
+    <div class="sub" style="margin-top:20px;">鐵則：<b class="gold">不要先建 Agent，先找出「重複的工作」</b>。順序＝工作→功能→技能→工作流。</div>
+  </section>
+
+  <!-- 13 兩層架構六件 -->
+  <section class="slide">
+    <div class="kicker">Core · 下對指令</div>
+    <h2>兩層架構：好指令的<span class="gold">六件</span></h2>
+    <div class="cols">
+      <div class="card"><h3>第一層（先求有）</h3><p>目標 ・ 背景 ・ 輸出<br><span style="color:var(--muted)">大家通常停在這，已堪用。</span></p></div>
+      <div class="card" style="border-color:var(--gold);"><h3>第二層（求好）</h3><p>再補 角色 ・ 限制 ・ <b class="gold">範例</b><br><span style="color:var(--muted)">拉開差距的地方。</span></p></div>
+    </div>
+    <div class="sub" style="margin-top:18px;text-align:center;">完整順序：<b class="gold">角色 → 目標 → 背景 → 限制 → 範例 → 輸出</b></div>
+    <div class="big-quote" style="margin-top:18px;font-size:clamp(19px,2.6vw,32px);">「第一層大家都會，<span class="gold">差距在第二層——尤其範例。</span>」</div>
+  </section>
+
+  <!-- 14 會議記錄 前置 -->
+  <section class="slide">
+    <div class="kicker">痛點 ① · 會議記錄</div>
+    <h2>第一步：把<span class="gold">錄音</span>變<span class="gold">逐字稿</span></h2>
+    <ul>
+      <li>AI 整理的是「逐字稿」，所以先把會議錄音變成文字。</li>
+      <li>推薦工具（繁中、免費額度）：<b>雅婷逐字稿</b>、<b>Notta</b>，或會議當下用 <b>Google 文件語音輸入</b>。</li>
+      <li>流程：錄音 → 轉逐字稿 → <b class="gold">先校對錯字、去識別化</b> → 再交給 Claude 整理。</li>
+    </ul>
+    <div class="sub" style="margin-top:16px;">提醒：轉出來的逐字稿一定有錯字，先掃一遍再交給 AI。</div>
+  </section>
+
+  <!-- 15 會議記錄 對照 -->
+  <section class="slide">
+    <div class="kicker">示範 ① · ❌ vs ✅</div>
+    <h2>會議記錄：逐字稿 → <span class="gold">表格</span></h2>
+    <div class="card bad" style="margin-top:8px;"><h3>❌ 舊思維</h3><p>「幫我整理一下會議紀錄。」→ 一大段文字、格式不固定、漏決議或負責人。</p></div>
+    <div class="card good" style="margin-top:14px;"><h3>✅ 完整正確版（六件）</h3>
+      <div class="prompt"><b>（角色）</b>你是會議記錄助理。<b>（背景）</b>這是社區會議逐字稿〔貼上〕。<b>（目標）</b>整理成表格：討論事項／決議／負責人／截止日。<b>（限制）</b>只整理稿子裡有的，沒提到填「未提及」。<b>（範例）</b>一列：電梯維修｜下月發包｜王主任｜6/30。<b>（輸出）</b>直接給我表格。</div></div>
+    <div class="sub" style="margin-top:14px;">🖥 你做①：用自己的會議片段做出來 → 🔁 實測：加反向檢查＋兩兩互測，修到能用。</div>
+  </section>
+
+  <!-- 16 SOP -->
+  <section class="slide">
+    <div class="kicker">示範 ② · SOP</div>
+    <h2>SOP：先<span class="gold">分析</span>，再決定<span class="gold">呈現</span></h2>
+    <div class="sub">拿到管理辦法，<b class="gold">不要急著叫 AI 生 SOP</b>。先分析 → 決定用途 → 再產出。</div>
+    <div class="steps">
+      <div class="step"><div class="no">1</div><div class="tt">先定位</div><div class="dd">給現場同仁照做</div></div>
+      <div class="step"><div class="no">2</div><div class="tt">先分析</div><div class="dd">角色/階段/表單/金額/罰則</div></div>
+      <div class="step"><div class="no">3</div><div class="tt">產出</div><div class="dd">可勾選的 SOP 表格</div></div>
+      <div class="step"><div class="no">4</div><div class="tt">反向檢查</div><div class="dd">跟原辦法逐條比對</div></div>
+    </div>
+    <div class="sub" style="margin-top:18px;">（成果見「SOP示範_裝修與遷入.html」。導入前先跟同仁溝通觀念，今天只示範。）</div>
+  </section>
+
+  <!-- 17 公告 經理 -->
+  <section class="slide">
+    <div class="kicker">示範 ③ · 公告（經理主講）</div>
+    <h2>用 <span class="gold">GPT</span> 做公告</h2>
+    <ul>
+      <li>經理現場示範：拿一則生硬公告 → 用 GPT <b>改得親切好讀、重點清楚</b>。</li>
+      <li><b class="gold">反向檢查</b>：請 GPT 先核對日期、金額、繳費方式，再定稿。</li>
+      <li>（可選）把定稿丟給能生圖的工具，做成可貼公佈欄／LINE 的公告圖。</li>
+    </ul>
+    <div class="sub" style="margin-top:16px;">寶哥補位：用「六件」點評——同一套邏輯，換工具也通。</div>
+  </section>
+
+  <!-- 18 區權會拆解 -->
+  <section class="slide">
+    <div class="kicker">痛點 ④ · 區權會簡報</div>
+    <h2>複雜的事，先讓 AI 幫你<span class="gold">拆</span></h2>
+    <div class="card good" style="margin-top:8px;"><h3>✅ 正確版（鉤子）</h3>
+      <div class="prompt">「你是社區行政助理。我要做一份區權會簡報。<b>先不要急著做</b>，請先把它拆成幾個步驟、列出每步要我提供什麼資料，我確認後再一步一步做。可參考去年架構：開場→財務回顧→重大事項→表決議案→結論。」</div></div>
+    <div class="big-quote" style="margin-top:22px;font-size:clamp(19px,2.6vw,32px);">先拆，再一步一步餵——<span class="gold">這就是「先拆解再做」。</span></div>
+  </section>
+
+  <!-- 19 收尾金句 -->
+  <section class="slide center">
+    <div class="deco"></div>
+    <div class="kicker">Wrap · 三個帶走</div>
+    <div style="display:flex;gap:14px;margin:6px 0 30px;flex-wrap:wrap;justify-content:center;">
+      <span class="tag">① 一個能用的 skill</span>
+      <span class="tag">② 底層邏輯（三部曲＋六件）</span>
+      <span class="tag">③ 反向檢查的習慣</span>
+    </div>
+    <div class="big-quote">AI 不會取代你，<span class="gold">但會用 AI 的人會</span>——<br>從今天起，你就是會用的人。</div>
+  </section>
+
+  <!-- 20 獎品延伸 -->
+  <section class="slide">
+    <div class="kicker">Bonus · 帶回家</div>
+    <h2><span class="gold">獎品</span>與延伸學習</h2>
+    <div class="cols">
+      <div class="card"><h3>兩張獎品卡</h3><p style="color:var(--muted)">物業 GPT 生圖提示詞包・Gemini 工作術包——都用六件架構寫好，可印可存。</p></div>
+      <div class="card"><h3>推薦 3 頻道</h3><p style="color:var(--muted)">泛科學院・杰森的效率工坊・大有牧森 Austin Chou（掃 QR 追蹤）。</p></div>
+    </div>
+    <div class="sub" style="margin-top:18px;">加入群組持續發問；一週後回饋「你的 skill 用起來如何」。</div>
+    <div class="sub" style="margin-top:10px;color:var(--gold2);">安全三提醒：AI 會錯→反向檢查　·　個資→去識別化　·　責任→人是最後把關。</div>
+  </section>
+
+</div>
+
+<div class="navbar">
+  <div class="brand">用 AI 把重複工作變簡單　·　<b>@bensonhsu0205</b></div>
+  <div class="pager">
+    <button class="navbtn" id="prev" aria-label="上一頁">‹</button>
+    <div class="count" id="count">1 / 20</div>
+    <button class="navbtn" id="next" aria-label="下一頁">›</button>
+  </div>
+</div>
+<div class="hintkey">← → 翻頁　·　空白鍵下一頁</div>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const bar = document.getElementById('bar');
+  const count = document.getElementById('count');
+  let i = 0;
+  function show(n){
+    i = Math.max(0, Math.min(slides.length-1, n));
+    slides.forEach((s,k)=>s.classList.toggle('active', k===i));
+    count.textContent = (i+1) + ' / ' + slides.length;
+    bar.style.width = ((i+1)/slides.length*100) + '%';
+  }
+  document.getElementById('next').onclick = ()=>show(i+1);
+  document.getElementById('prev').onclick = ()=>show(i-1);
+  document.addEventListener('keydown', e=>{
+    if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){ e.preventDefault(); show(i+1); }
+    else if(e.key==='ArrowLeft'||e.key==='PageUp'){ e.preventDefault(); show(i-1); }
+    else if(e.key==='Home'){ show(0); } else if(e.key==='End'){ show(slides.length-1); }
+  });
+  show(0);
+</script>
+</body>
+</html>
